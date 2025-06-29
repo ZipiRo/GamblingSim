@@ -9,7 +9,7 @@
 using namespace std;
 
 const bool CSVFiles = false;
-const int Odds = 320;
+int Odds = 320;
 
 int generateBellValue(int handSize)
 {
@@ -173,167 +173,177 @@ int main()
 {
     srand((unsigned int)time(0));
 
-    ofstream resultFile("gambling_simulation_data.txt");
-    ofstream csvDataFile("gambling_simulation_data.csv");
+    ofstream csvBigResult("gambling_simulation_important_data.csv");
+    csvBigResult << "Odd,Average Win,Average Lost,Average Profit\n";
 
-    csvDataFile << "Batch,Winning Tries,Time-Limit Wins,Total Won,Total Lost,Total Profit,Win Rate (%),Avg Profit per Win,Avg Spins per Try,Avg Rushes per Try\n";
-
-    const int TryOnTryes = 1000;                  // How many simulation batches
-    const int TryFor = 20;                      // How many tries per batch
-    const int handSize = 1;                     // RON per spin
-    const int maxSpins = 100000;                // Max spins per try
-    const int profitTarget = 200;              // Stop if profit reaches RON
-    const int lossLimit = -30;                  // Stop if losses reach RON
-    const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
-    const int maxMinutes = 3;                   // Max minutes to gamble
-    const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
-
-    int averageWon = 0;
-    int averageLost = 0;
-    int averageProfit = 0;
-
-    resultFile << "=== Simulation Parameters ===\n";
-    resultFile << "Simulations: " << TryOnTryes << "\n";
-    resultFile << "Odds: " << Odds << "\n";
-    resultFile << "Batches of: " << TryFor << " tryes\n";
-    resultFile << "HandSize: " << handSize << " RON\n";
-    resultFile << "Profit target: " << profitTarget << "\n";
-    resultFile << "Loss limit: " << lossLimit << "\n";
-    resultFile << "Time limit: " << maxMinutes << " min \n";
-
-    resultFile << "\nSimulation start.\n\n";
-
-    for (int batch = 1; batch <= TryOnTryes; ++batch)
+    for (int i = 300; i <= 301; i+=10)
     {
-        int currentTry = 1;
-        int totalProfitAllTries = 0;
-        int winningTries = 0;
-        int timeLimitWinningTries = 0;
-        int totalSpinsAllTries = 0;
-        int totalRushesAllTries = 0;
-        int totalLossAllTries = 0;
+        Odds = i;
 
-        string filename = "simulation_results_" + to_string(batch) + ".csv";
-        ofstream dataFile;
+        ofstream resultFile("gambling_simulation_data.txt");
+        ofstream csvDataFile("gambling_simulation_data.csv");
 
-        if (CSVFiles)
-            dataFile.open(filename);
+        csvDataFile << "Batch,Winning Tries,Time-Limit Wins,Total Won,Total Lost,Total Profit,Win Rate (%),Avg Profit per Win,Avg Spins per Try,Avg Rushes per Try\n";
 
-        for (currentTry = 1; currentTry <= TryFor; ++currentTry)
+        const int TryOnTryes = 10;                // How many simulation batches
+        const int TryFor = 100;                      // How many tries per batch
+        const int handSize = 100;                     // RON per spin
+        const int maxSpins = 100000;                // Max spins per try
+        const int profitTarget = 200;               // Stop if profit reaches RON
+        const int lossLimit = -3000;                  // Stop if losses reach RON
+        const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
+        const int maxMinutes = 3;                   // Max minutes to gamble
+        const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
+
+        int averageWon = 0;
+        int averageLost = 0;
+        int averageProfit = 0;
+
+        resultFile << "=== Simulation Parameters ===\n";
+        resultFile << "Simulations: " << TryOnTryes << "\n";
+        resultFile << "Odds: " << Odds << "\n";
+        resultFile << "Batches of: " << TryFor << " tryes\n";
+        resultFile << "HandSize: " << handSize << " RON\n";
+        resultFile << "Profit target: " << profitTarget << "\n";
+        resultFile << "Loss limit: " << lossLimit << "\n";
+        resultFile << "Time limit: " << maxMinutes << " min \n";
+
+        resultFile << "\nSimulation start.\n\n";
+
+        for (int batch = 1; batch <= TryOnTryes; ++batch)
         {
+            int currentTry = 1;
+            int totalProfitAllTries = 0;
+            int winningTries = 0;
+            int timeLimitWinningTries = 0;
+            int totalSpinsAllTries = 0;
+            int totalRushesAllTries = 0;
+            int totalLossAllTries = 0;
+
+            string filename = "simulation_results_" + to_string(batch) + ".csv";
+            ofstream dataFile;
+
             if (CSVFiles)
+                dataFile.open(filename);
+
+            for (currentTry = 1; currentTry <= TryFor; ++currentTry)
             {
-                dataFile << "Spin,Total Invested,Total Won,Profit/Loss\n";
-            }
-
-            int totalInvested = 0;
-            int totalWon = 0;
-            int rushCount = 0;
-            int spinsUsedInRush = 0;
-            int simulatedTime = 0;
-
-            int profit = 0;
-            int maxProfit = 0;
-            int spin = 0;
-            int rushTotalBellsCount = 0;
-
-            for (spin = 1; spin <= maxSpins; ++spin)
-            {
-                bool rushTriggered = false;
-                int firstHandBellsCount = 0;
-                totalInvested += handSize;
-                simulatedTime += secondsPerSpin;
-
-                int basePayout = baseGameBonus(handSize, rushTriggered, firstHandBellsCount);
-                totalWon += basePayout;
-
-                if (rushTriggered)
+                if (CSVFiles)
                 {
-                    int rushWinnings = rushMode(handSize, firstHandBellsCount, spinsUsedInRush, rushTotalBellsCount, dataFile);
-                    totalWon += rushWinnings;
-                    rushCount++;
+                    dataFile << "Spin,Total Invested,Total Won,Profit/Loss\n";
                 }
 
-                profit = totalWon - totalInvested;
-                if (maxProfit < profit)
-                    maxProfit = profit;
+                int totalInvested = 0;
+                int totalWon = 0;
+                int rushCount = 0;
+                int spinsUsedInRush = 0;
+                int simulatedTime = 0;
+
+                int profit = 0;
+                int maxProfit = 0;
+                int spin = 0;
+                int rushTotalBellsCount = 0;
+
+                for (spin = 1; spin <= maxSpins; ++spin)
+                {
+                    bool rushTriggered = false;
+                    int firstHandBellsCount = 0;
+                    totalInvested += handSize;
+                    simulatedTime += secondsPerSpin;
+
+                    int basePayout = baseGameBonus(handSize, rushTriggered, firstHandBellsCount);
+                    totalWon += basePayout;
+
+                    if (rushTriggered)
+                    {
+                        int rushWinnings = rushMode(handSize, firstHandBellsCount, spinsUsedInRush, rushTotalBellsCount, dataFile);
+                        totalWon += rushWinnings;
+                        rushCount++;
+                    }
+
+                    profit = totalWon - totalInvested;
+                    if (maxProfit < profit)
+                        maxProfit = profit;
+
+                    if (CSVFiles)
+                        dataFile << spin << ",     " << totalInvested << ",       " << totalWon << ",       " << profit << "\n";
+
+                    if (profit >= profitTarget || profit <= lossLimit || simulatedTime >= maxAllowedTime)
+                    {
+                        if (CSVFiles)
+                            dataFile << "\n";
+                        break;
+                    }
+                }
+
+                totalSpinsAllTries += spin;
+                totalRushesAllTries += rushCount;
 
                 if (CSVFiles)
-                    dataFile << spin << ",     " << totalInvested << ",       " << totalWon << ",       " << profit << "\n";
-
-                if (profit >= profitTarget || profit <= lossLimit || simulatedTime >= maxAllowedTime)
+                    dataFile << "Simulated time used: " << simulatedTime / 60 << " minutes " << simulatedTime % 60 << " seconds\n";
+                if (profit >= profitTarget)
                 {
                     if (CSVFiles)
-                        dataFile << "\n";
-                    break;
+                        dataFile << "THIS IS A PROFIT TARGET WINNER | Try #" << currentTry << " | PROFIT: " << profit << " RON\n";
+                    totalProfitAllTries += profit;
+                    winningTries++;
                 }
+                else if (simulatedTime >= maxAllowedTime && profit >= 0)
+                {
+                    if (CSVFiles)
+                        dataFile << "TIME LIMIT POSITIVE SESSION | Try #" << currentTry << " | PROFIT: " << profit << " RON\n";
+                    totalProfitAllTries += profit;
+                    winningTries++;
+                    timeLimitWinningTries++;
+                }
+                if (CSVFiles)
+                    dataFile << "MAX PROFIT: " << maxProfit << " RON | RUSH SPINS: " << rushCount << " | RUSH TOTAL BELLS COUNT: " << rushTotalBellsCount << "\n\n";
             }
 
-            totalSpinsAllTries += spin;
-            totalRushesAllTries += rushCount;
+            if (CSVFiles)
+                dataFile.close();
 
-            if (CSVFiles)
-                dataFile << "Simulated time used: " << simulatedTime / 60 << " minutes " << simulatedTime % 60 << " seconds\n";
-            if (profit >= profitTarget)
-            {
-                if (CSVFiles)
-                    dataFile << "THIS IS A PROFIT TARGET WINNER | Try #" << currentTry << " | PROFIT: " << profit << " RON\n";
-                totalProfitAllTries += profit;
-                winningTries++;
-            }
-            else if (simulatedTime >= maxAllowedTime && profit >= 0)
-            {
-                if (CSVFiles)
-                    dataFile << "TIME LIMIT POSITIVE SESSION | Try #" << currentTry << " | PROFIT: " << profit << " RON\n";
-                totalProfitAllTries += profit;
-                winningTries++;
-                timeLimitWinningTries++;
-            }
-            if (CSVFiles)
-                dataFile << "MAX PROFIT: " << maxProfit << " RON | RUSH SPINS: " << rushCount << " | RUSH TOTAL BELLS COUNT: " << rushTotalBellsCount << "\n\n";
+            totalLossAllTries = (TryFor - winningTries) * lossLimit;
+
+            resultFile << fixed << setprecision(2);
+            resultFile << "=== Batch #" << batch << " Summary ===\n";
+            resultFile << "Total tries: " << TryFor << "\n";
+            resultFile << "Winning tries: " << winningTries << "\n";
+            resultFile << "Winning time run out tries: " << timeLimitWinningTries << "\n";
+            resultFile << "Won: +" << totalProfitAllTries * 1.0 << " RON\n";
+            resultFile << "Lost: " << totalLossAllTries * 1.0 << " RON\n";
+            resultFile << "Total: " << totalProfitAllTries + totalLossAllTries * 1.0 << " RON\n";
+            resultFile << "Win rate: " << (winningTries * 100.0 / TryFor) << "%\n";
+            if (winningTries > 0)
+                resultFile << "Average profit per winning try: +" << (totalProfitAllTries * 1.0 / winningTries) << " RON\n";
+            else
+                resultFile << "Average profit per winning try: N/A\n";
+
+            resultFile << "Total spins: " << totalSpinsAllTries << "\n";
+            resultFile << "Total rushes: " << totalRushesAllTries << "\n";
+            resultFile << "Average spins per try: " << (totalSpinsAllTries * 1.0 / TryFor) << "\n";
+            resultFile << "Average rushes per try: " << (totalRushesAllTries * 1.0 / TryFor) << "\n\n";
+
+            csvDataFile << batch << ',' << winningTries << ',' << timeLimitWinningTries << ',' << totalProfitAllTries * 1.0 << ',' << totalLossAllTries * 1.0 << ',' << totalProfitAllTries + totalLossAllTries * 1.0 << ',' << (winningTries * 100.0 / TryFor) << ',' << (totalProfitAllTries * 1.0 / winningTries) << ',' << (totalSpinsAllTries * 1.0 / TryFor) << ',' << (totalRushesAllTries * 1.0 / TryFor) << '\n';
+
+            averageWon += totalProfitAllTries;
+            averageLost += totalLossAllTries;
+            averageProfit += totalProfitAllTries + totalLossAllTries;
         }
 
-        if (CSVFiles)
-            dataFile.close();
+        averageLost /= TryOnTryes;
+        averageWon /= TryOnTryes;
+        averageProfit /= TryOnTryes;
 
-        totalLossAllTries = (TryFor - winningTries) * lossLimit;
+        resultFile << "\n=== Simulation Averages === \n";
+        resultFile << "Average Won: " << averageWon << " RON | Average Lost: " << averageLost << " RON | Average Profit: " << averageProfit << " RON \n\n";
 
-        resultFile << fixed << setprecision(2);
-        resultFile << "=== Batch #" << batch << " Summary ===\n";
-        resultFile << "Total tries: " << TryFor << "\n";
-        resultFile << "Winning tries: " << winningTries << "\n";
-        resultFile << "Winning time run out tries: " << timeLimitWinningTries << "\n";
-        resultFile << "Won: +" << totalProfitAllTries * 1.0 << " RON\n";
-        resultFile << "Lost: " << totalLossAllTries * 1.0 << " RON\n";
-        resultFile << "Total: " << totalProfitAllTries + totalLossAllTries * 1.0 << " RON\n";
-        resultFile << "Win rate: " << (winningTries * 100.0 / TryFor) << "%\n";
-        if (winningTries > 0)
-            resultFile << "Average profit per winning try: +" << (totalProfitAllTries * 1.0 / winningTries) << " RON\n";
-        else
-            resultFile << "Average profit per winning try: N/A\n";
-
-        resultFile << "Total spins: " << totalSpinsAllTries << "\n";
-        resultFile << "Total rushes: " << totalRushesAllTries << "\n";
-        resultFile << "Average spins per try: " << (totalSpinsAllTries * 1.0 / TryFor) << "\n";
-        resultFile << "Average rushes per try: " << (totalRushesAllTries * 1.0 / TryFor) << "\n\n";
-
-        csvDataFile << batch << ',' << winningTries << ',' << timeLimitWinningTries << ',' << totalProfitAllTries * 1.0 << ',' << totalLossAllTries * 1.0 << ',' << totalProfitAllTries + totalLossAllTries * 1.0 << ',' << (winningTries * 100.0 / TryFor) << ',' << (totalProfitAllTries * 1.0 / winningTries) << ',' << (totalSpinsAllTries * 1.0 / TryFor) << ',' << (totalRushesAllTries * 1.0 / TryFor) << '\n';
-
-        averageWon += totalProfitAllTries;
-        averageLost += totalLossAllTries;
-        averageProfit += totalProfitAllTries + totalLossAllTries;
+        csvBigResult << Odds << ',' << averageWon << ',' << averageLost << ',' << averageProfit << '\n';
+        resultFile.close();
+        csvDataFile.close();
     }
 
-    averageLost /= TryOnTryes;
-    averageWon /= TryOnTryes;
-    averageProfit /= TryOnTryes;
-
-    resultFile << "\n=== Simulation Averages === \n";
-    resultFile << "Average Won: " << averageWon << " RON | Average Lost: " << averageLost << " RON | Average Profit: " << averageProfit << " RON \n\n";
-
-    resultFile.close();
-    csvDataFile.close();
-
+    csvBigResult.close();
     cout << "Simulation complete. Results saved in CSV files.\n";
     return 0;
 }
