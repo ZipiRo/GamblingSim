@@ -173,15 +173,15 @@ int main()
 {
     srand((unsigned int)time(0));
 
-    ofstream csvBigResult("gambling_simulation_important_data.csv");
+    ofstream csvBigResult("Result/gambling_simulation_important_data.csv");
     csvBigResult << "Odd,Average Win,Average Lost,Average Profit\n";
 
     for (int i = 300; i <= 301; i+=10)
     {
         Odds = i;
 
-        ofstream resultFile("gambling_simulation_data.txt");
-        ofstream csvDataFile("gambling_simulation_data.csv");
+        ofstream resultFile("Result/gambling_simulation_data.txt");
+        ofstream csvDataFile("Result/gambling_simulation_data.csv");
 
         csvDataFile << "Batch,Winning Tries,Time-Limit Wins,Total Won,Total Lost,Total Profit,Win Rate (%),Avg Profit per Win,Avg Spins per Try,Avg Rushes per Try\n";
 
@@ -220,7 +220,7 @@ int main()
             int totalRushesAllTries = 0;
             int totalLossAllTries = 0;
 
-            string filename = "simulation_results_" + to_string(batch) + ".csv";
+            string filename = "Result/simulation_results_" + to_string(batch) + ".csv";
             ofstream dataFile;
 
             if (CSVFiles)

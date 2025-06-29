@@ -1,0 +1,155 @@
+=== Simulation Parameters ===
+Simulations: 10
+Odds: 511
+Batches of: 20 tryes
+HandSize: 1 RON
+Profit target: 200
+Loss limit: -30
+Time limit: 3 min 
+
+Simulation start.
+
+=== Batch #1 Summary ===
+Total tries: 20
+Winning tries: 1
+Winning time run out tries: 1
+Won: +4.00 RON
+Lost: -570.00 RON
+Total: -566.00 RON
+Win rate: 5.00%
+Average profit per winning try: +4.00 RON
+Total spins: 648
+Total rushes: 1
+Average spins per try: 32.40
+Average rushes per try: 0.05
+
+=== Batch #2 Summary ===
+Total tries: 20
+Winning tries: 5
+Winning time run out tries: 5
+Won: +100.00 RON
+Lost: -450.00 RON
+Total: -350.00 RON
+Win rate: 25.00%
+Average profit per winning try: +20.00 RON
+Total spins: 654
+Total rushes: 0
+Average spins per try: 32.70
+Average rushes per try: 0.00
+
+=== Batch #3 Summary ===
+Total tries: 20
+Winning tries: 8
+Winning time run out tries: 8
+Won: +108.00 RON
+Lost: -360.00 RON
+Total: -252.00 RON
+Win rate: 40.00%
+Average profit per winning try: +13.50 RON
+Total spins: 702
+Total rushes: 3
+Average spins per try: 35.10
+Average rushes per try: 0.15
+
+=== Batch #4 Summary ===
+Total tries: 20
+Winning tries: 3
+Winning time run out tries: 3
+Won: +72.00 RON
+Lost: -510.00 RON
+Total: -438.00 RON
+Win rate: 15.00%
+Average profit per winning try: +24.00 RON
+Total spins: 666
+Total rushes: 0
+Average spins per try: 33.30
+Average rushes per try: 0.00
+
+=== Batch #5 Summary ===
+Total tries: 20
+Winning tries: 6
+Winning time run out tries: 6
+Won: +24.00 RON
+Lost: -420.00 RON
+Total: -396.00 RON
+Win rate: 30.00%
+Average profit per winning try: +4.00 RON
+Total spins: 672
+Total rushes: 0
+Average spins per try: 33.60
+Average rushes per try: 0.00
+
+=== Batch #6 Summary ===
+Total tries: 20
+Winning tries: 3
+Winning time run out tries: 3
+Won: +32.00 RON
+Lost: -510.00 RON
+Total: -478.00 RON
+Win rate: 15.00%
+Average profit per winning try: +10.67 RON
+Total spins: 678
+Total rushes: 0
+Average spins per try: 33.90
+Average rushes per try: 0.00
+
+=== Batch #7 Summary ===
+Total tries: 20
+Winning tries: 3
+Winning time run out tries: 3
+Won: +48.00 RON
+Lost: -510.00 RON
+Total: -462.00 RON
+Win rate: 15.00%
+Average profit per winning try: +16.00 RON
+Total spins: 648
+Total rushes: 1
+Average spins per try: 32.40
+Average rushes per try: 0.05
+
+=== Batch #8 Summary ===
+Total tries: 20
+Winning tries: 2
+Winning time run out tries: 2
+Won: +8.00 RON
+Lost: -540.00 RON
+Total: -532.00 RON
+Win rate: 10.00%
+Average profit per winning try: +4.00 RON
+Total spins: 654
+Total rushes: 0
+Average spins per try: 32.70
+Average rushes per try: 0.00
+
+=== Batch #9 Summary ===
+Total tries: 20
+Winning tries: 1
+Winning time run out tries: 1
+Won: +4.00 RON
+Lost: -570.00 RON
+Total: -566.00 RON
+Win rate: 5.00%
+Average profit per winning try: +4.00 RON
+Total spins: 624
+Total rushes: 0
+Average spins per try: 31.20
+Average rushes per try: 0.00
+
+=== Batch #10 Summary ===
+Total tries: 20
+Winning tries: 4
+Winning time run out tries: 4
+Won: +56.00 RON
+Lost: -480.00 RON
+Total: -424.00 RON
+Win rate: 20.00%
+Average profit per winning try: +14.00 RON
+Total spins: 666
+Total rushes: 0
+Average spins per try: 33.30
+Average rushes per try: 0.00
+
+
+=== Simulation Averages === 
+Average Won: 45 RON | Average Lost: -492 RON | Average Profit: -446 RON 
+

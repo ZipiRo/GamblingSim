@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const bool CSVFiles = false;
-int Odds = 320;
+const bool CSVFiles = true;
+const int Odds = 350;
 
 int generateBellValue(int handSize)
 {
@@ -173,21 +173,24 @@ int main()
 {
     srand((unsigned int)time(0));
 
-    ofstream resultFile("gambling_simulation_data.txt");
-    ofstream csvDataFile("gambling_simulation_data.csv");
+    ofstream resultFile("Result/gambling_simulation_data.txt");
+    ofstream csvDataFile("Result/gambling_simulation_data.csv");
 
     csvDataFile << "Batch,Winning Tries,Time-Limit Wins,Total Won,Total Lost,Total Profit,Win Rate (%),Avg Profit per Win,Avg Spins per Try,Avg Rushes per Try\n";
 
+    // ===== Play With This Parameters Bro
+
     const int TryOnTryes = 10;                  // How many simulation batches
-    const int TryFor = 100;                     // How many tries per batch
+    const int TryFor = 20;                     // How many tries per batch
     const int handSize = 100;                   // RON per spin
     const int maxSpins = 100000;                // Max spins per try
-    const int profitTarget = 200;               // Stop if profit reaches RON
-    const int lossLimit = -3000;                // Stop if losses reach RON
+    const int profitTarget = 2500;               // Stop if profit reaches RON
+    const int lossLimit = -1000;                // Stop if losses reach RON
     const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
     const int maxMinutes = 3;                   // Max minutes to gamble
     const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
-
+    // =====
+    
     int averageWon = 0;
     int averageLost = 0;
     int averageProfit = 0;
@@ -213,7 +216,7 @@ int main()
         int totalRushesAllTries = 0;
         int totalLossAllTries = 0;
 
-        string filename = "simulation_results_" + to_string(batch) + ".csv";
+        string filename = "Result/simulation_results_" + to_string(batch) + ".csv";
         ofstream dataFile;
 
         if (CSVFiles)
