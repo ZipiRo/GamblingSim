@@ -70,9 +70,9 @@ Adjust these parameters directly in the code before compiling:
 
 ```cpp
 const int Odds = 350;           // Lower = harder odds (affects symbol rarity)
-const int handSize = 2;         // Bet amount per spin (RON)
-const int profitTarget = 1000;  // Profit target to stop session (RON)
-const int lossLimit = -30;      // Loss limit to stop session (RON)
+const int handSize = 2;         // Bet amount per spin (€)
+const int profitTarget = 1000;  // Profit target to stop session (€)
+const int lossLimit = -30;      // Loss limit to stop session (€)
 const int maxMinutes = 3;       // Max time per try in minutes
 const int TryOnTryes = 10;      // Number of simulation batches
 const int TryFor = 20;          // Tries per batch

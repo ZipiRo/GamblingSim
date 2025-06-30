@@ -4,12 +4,12 @@
 =============================================
     Author          : ZipiRo
     Date            : 6/30/2025
-    Description     : 
+    Description     :
         I wanted to simulate what would happen if you gamble on the game of slots
-        and the program gives a lot of data of what happens when you chose to use 
+        and the program gives a lot of data of what happens when you chose to use
         a certain hand size and some limits to stop gambling.
 
-        Intended as a mathematical and statistical tool to analyze game 
+        Intended as a mathematical and statistical tool to analyze game
         balance and player outcomes. Inspired by real-world casino behavior.
 */
 
@@ -23,14 +23,14 @@
 
 using namespace std;
 // ===== Play With This Parameters Bro
-const int Odds = 330; // 330 is the goldylocks 110 is just money and > 330 is just loosing
-const bool CSVFiles = false; // If you want data for the every batch
-const int TryOnTryes = 10;                  // How many simulation batches
-const int TryFor = 12;                     // How many tries per batch
-const int handSize = 1;                   // RON per spin
-const int profitTarget = 200;               // Stop if profit reaches RON
-const int lossLimit = -30;                // Stop if losses reach RON
-const int maxMinutes = 3;                   // Max minutes to gamble
+const int Odds = 330;         // 330 is the goldylocks 110 is just money and > 330 is just loosing
+const bool CSVFiles = false;  // If you want data for the every batch
+const int TryOnTryes = 10;    // How many simulation batches
+const int TryFor = 12;        // How many tries per batch
+const int handSize = 1;       // € per spin
+const int profitTarget = 200; // Stop if profit reaches €
+const int lossLimit = -30;    // Stop if losses reach €
+const int maxMinutes = 3;     // Max minutes to gamble
 // =====
 
 const int maxSpins = 100000;                // Max spins per try
@@ -103,7 +103,7 @@ int rushMode(int handSize, int firstHandBellsCount, int &spinsUsed, int &rushTot
     }
 
     if (CSVFiles)
-        data << "\n=== Adding Up To: " << totalWinnings << "RON ===\n";
+        data << "\n=== Adding Up To: " << totalWinnings << "€ ===\n";
 
     return totalWinnings;
 }
@@ -197,6 +197,7 @@ int baseGameBonus(int handSize, bool &rushTriggered, int &firstHandBellsCount)
 
 int main()
 {
+    system("mkdir Result");
     srand((unsigned int)time(0));
 
     ofstream resultFile("Result/gambling_simulation_data.txt");
@@ -204,7 +205,6 @@ int main()
 
     csvDataFile << "Batch,Winning Tries,Time-Limit Wins,Total Won,Total Lost,Total Profit,Win Rate (%),Avg Profit per Win,Avg Spins per Try,Avg Rushes per Try\n";
 
-    
     int averageWon = 0;
     int averageLost = 0;
     int averageProfit = 0;
@@ -213,7 +213,7 @@ int main()
     resultFile << "Simulations: " << TryOnTryes << "\n";
     resultFile << "Odds: " << Odds << "\n";
     resultFile << "Batches of: " << TryFor << " tryes\n";
-    resultFile << "HandSize: " << handSize << " RON\n";
+    resultFile << "HandSize: " << handSize << " €\n";
     resultFile << "Profit target: " << profitTarget << "\n";
     resultFile << "Loss limit: " << lossLimit << "\n";
     resultFile << "Time limit: " << maxMinutes << " min \n";
@@ -294,20 +294,20 @@ int main()
             if (profit >= profitTarget)
             {
                 if (CSVFiles)
-                    dataFile << "THIS IS A PROFIT TARGET WINNER | Try #" << currentTry << " | PROFIT: " << profit << " RON\n";
+                    dataFile << "THIS IS A PROFIT TARGET WINNER | Try #" << currentTry << " | PROFIT: " << profit << " €\n";
                 totalProfitAllTries += profit;
                 winningTries++;
             }
             else if (simulatedTime >= maxAllowedTime && profit >= 0)
             {
                 if (CSVFiles)
-                    dataFile << "TIME LIMIT POSITIVE SESSION | Try #" << currentTry << " | PROFIT: " << profit << " RON\n";
+                    dataFile << "TIME LIMIT POSITIVE SESSION | Try #" << currentTry << " | PROFIT: " << profit << " €\n";
                 totalProfitAllTries += profit;
                 winningTries++;
                 timeLimitWinningTries++;
             }
             if (CSVFiles)
-                dataFile << "MAX PROFIT: " << maxProfit << " RON | RUSH SPINS: " << rushCount << " | RUSH TOTAL BELLS COUNT: " << rushTotalBellsCount << "\n\n";
+                dataFile << "MAX PROFIT: " << maxProfit << " € | RUSH SPINS: " << rushCount << " | RUSH TOTAL BELLS COUNT: " << rushTotalBellsCount << "\n\n";
         }
 
         if (CSVFiles)
@@ -320,12 +320,12 @@ int main()
         resultFile << "Total tries: " << TryFor << "\n";
         resultFile << "Winning tries: " << winningTries << "\n";
         resultFile << "Winning time run out tries: " << timeLimitWinningTries << "\n";
-        resultFile << "Won: +" << totalProfitAllTries * 1.0 << " RON\n";
-        resultFile << "Lost: " << totalLossAllTries * 1.0 << " RON\n";
-        resultFile << "Total: " << totalProfitAllTries + totalLossAllTries * 1.0 << " RON\n";
+        resultFile << "Won: +" << totalProfitAllTries * 1.0 << " €\n";
+        resultFile << "Lost: " << totalLossAllTries * 1.0 << " €\n";
+        resultFile << "Total: " << totalProfitAllTries + totalLossAllTries * 1.0 << " €\n";
         resultFile << "Win rate: " << (winningTries * 100.0 / TryFor) << "%\n";
         if (winningTries > 0)
-            resultFile << "Average profit per winning try: +" << (totalProfitAllTries * 1.0 / winningTries) << " RON\n";
+            resultFile << "Average profit per winning try: +" << (totalProfitAllTries * 1.0 / winningTries) << " €\n";
         else
             resultFile << "Average profit per winning try: N/A\n";
 
@@ -346,11 +346,11 @@ int main()
     averageProfit /= TryOnTryes;
 
     resultFile << "\n=== Simulation Averages === \n";
-    resultFile << "Average Won: " << averageWon << " RON | Average Lost: " << averageLost << " RON | Average Profit: " << averageProfit << " RON \n\n";
+    resultFile << "Average Won: " << averageWon << " € | Average Lost: " << averageLost << " € | Average Profit: " << averageProfit << " € \n\n";
 
     resultFile.close();
     csvDataFile.close();
-    
+
     cout << "Simulation complete. Results saved in CSV files.\n";
     return 0;
 }
