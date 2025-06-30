@@ -1,3 +1,18 @@
+/*
+=============================================
+    GamblingSimulator - Data
+=============================================
+    Author          : ZipiRo
+    Date            : 6/30/2025
+    Description     : 
+        I wanted to simulate what would happen if you gamble on the game of slots
+        and the program gives a lot of data of what happens when you chose to use 
+        a certain hand size and some limits to stop gambling.
+
+        Intended as a mathematical and statistical tool to analyze game 
+        balance and player outcomes. Inspired by real-world casino behavior.
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>

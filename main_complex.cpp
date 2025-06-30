@@ -1,3 +1,18 @@
+/*
+=============================================
+    GamblingSimulator - Data
+=============================================
+    Author          : ZipiRo
+    Date            : 6/30/2025
+    Description     : 
+        I wanted to simulate what would happen if you gamble on the game of slots
+        and the program gives a lot of data of what happens when you chose to use 
+        a certain hand size and some limits to stop gambling.
+
+        Intended as a mathematical and statistical tool to analyze game 
+        balance and player outcomes. Inspired by real-world casino behavior.
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,8 +23,8 @@
 
 using namespace std;
 
-const bool CSVFiles = false;
-int Odds = 320;
+const bool CSVFiles = false; // If you want data for the every batch, I don't think you want it for this
+int Odds = 330; // 330 is the goldylocks 110 is just money and > 330 is just loosing
 
 int generateBellValue(int handSize)
 {
