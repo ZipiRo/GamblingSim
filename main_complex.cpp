@@ -23,8 +23,19 @@
 
 using namespace std;
 
-const bool CSVFiles = false; // If you want data for the every batch, I don't think you want it for this
+// ===== Play With This Parameters Bro
 int Odds = 330; // 330 is the goldylocks 110 is just money and > 330 is just loosing
+const bool CSVFiles = false; // If you want data for the every batch
+const int TryOnTryes = 10;                  // How many simulation batches
+const int TryFor = 12;                     // How many tries per batch
+const int handSize = 1;                   // RON per spin
+const int maxSpins = 100000;                // Max spins per try
+const int profitTarget = 200;               // Stop if profit reaches RON
+const int lossLimit = -30;                // Stop if losses reach RON
+const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
+const int maxMinutes = 3;                   // Max minutes to gamble
+const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
+// =====
 
 int generateBellValue(int handSize)
 {
@@ -199,16 +210,6 @@ int main()
         ofstream csvDataFile("Result/gambling_simulation_data.csv");
 
         csvDataFile << "Batch,Winning Tries,Time-Limit Wins,Total Won,Total Lost,Total Profit,Win Rate (%),Avg Profit per Win,Avg Spins per Try,Avg Rushes per Try\n";
-
-        const int TryOnTryes = 10;                // How many simulation batches
-        const int TryFor = 100;                      // How many tries per batch
-        const int handSize = 100;                     // RON per spin
-        const int maxSpins = 100000;                // Max spins per try
-        const int profitTarget = 200;               // Stop if profit reaches RON
-        const int lossLimit = -3000;                  // Stop if losses reach RON
-        const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
-        const int maxMinutes = 3;                   // Max minutes to gamble
-        const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
 
         int averageWon = 0;
         int averageLost = 0;
