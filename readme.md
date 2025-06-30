@@ -90,7 +90,7 @@ This project is intended for **educational and statistical purposes only**. It d
 ## 👨‍💻 Author
 
 **Zipi Ro**  
-C++ Developer | Simulation Enthusiast  
+C++ Developer | Programming Enthusiast  
 
 ---
 

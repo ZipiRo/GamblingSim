@@ -11,6 +11,8 @@
 
         Intended as a mathematical and statistical tool to analyze game 
         balance and player outcomes. Inspired by real-world casino behavior.
+
+        This complex one just uses more odds from 110 to 500 with ++ how much you want
 */
 
 #include <iostream>
@@ -29,13 +31,14 @@ const bool CSVFiles = false; // If you want data for the every batch
 const int TryOnTryes = 10;                  // How many simulation batches
 const int TryFor = 12;                     // How many tries per batch
 const int handSize = 1;                   // RON per spin
-const int maxSpins = 100000;                // Max spins per try
 const int profitTarget = 200;               // Stop if profit reaches RON
 const int lossLimit = -30;                // Stop if losses reach RON
-const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
 const int maxMinutes = 3;                   // Max minutes to gamble
-const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
 // =====
+
+const int maxSpins = 100000;                // Max spins per try
+const int secondsPerSpin = 5;               // Each spin takes secondsPerSpin seconds
+const int maxAllowedTime = maxMinutes * 60; // Time limit to gamble in seconds
 
 int generateBellValue(int handSize)
 {
