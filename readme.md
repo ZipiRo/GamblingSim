@@ -55,14 +55,29 @@ g++ gambling_simulation.cpp -o simulation
 
 ## 📁 File Structure
 
-| File                           | Description                                   |
-|--------------------------------|-----------------------------------------------|
-| `gambling_simulation.cpp`      | Main simulation source code                   |
-| `gambling_simulation_data.txt` | Summary of all simulation batches             |
-| `gambling_simulation_data.csv` | Overall batch statistics in CSV format        |
-| `simulation_results_X.csv`     | (Optional) Per-batch detailed spin breakdowns |
+| File                                  | Description                                   |
+|---------------------------------------|-----------------------------------------------|
+| `gambling_simulation.cpp`             | Main simulation source code                   |
+| `Result`                              | Folder for the simulation result              |
+| `Result/gambling_simulation_data.txt` | Summary of all simulation batches             |
+| `Result/gambling_simulation_data.csv` | Overall batch statistics in CSV format        |
+| `Result/simulation_results_X.csv`     | (Optional) Per-batch detailed spin breakdowns |
 
 ---
+
+# Gambling Simulator - Rush Mode Strategy Analyzer 🎰
+
+## 📦 Project Structure
+
+/GamblingSimulator
+│ gambling_simulator.cpp // Main C++ simulation source code
+│ README.md // Project description and usage instructions
+│
+└───Result
+gambling_simulation_data.txt // Summary logs from simulations
+gambling_simulation_data.csv // Batch summaries (CSV format)
+simulation_results_1.csv // Detailed per-spin data for Batch 1
+simulation_results_2.csv // Detailed per-spin data for Batch 2
 
 ## 🛠️ Configuration
 
