@@ -3,7 +3,7 @@
     GamblingSimulator - Data
 =============================================
     Author          : ZipiRo
-    Date            : 6/30/2025
+    Date            : 6/29/2025
     Description     :
         I wanted to simulate what would happen if you gamble on the game of slots
         and the program gives a lot of data of what happens when you chose to use
